@@ -1,6 +1,6 @@
 {
   "name": "koa-redis-pool",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Redis middleware for koa, support connection pool.",
   "main": "index.js",
   "keywords": [

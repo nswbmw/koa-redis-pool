@@ -37,9 +37,13 @@ function redisPool(options) {
     if (!this.redis) this.throw('Fail to acquire one redis connection')
     debug('Acquire one connection');
 
-    yield next;
-
-    this.app._redisPool.release(this.redis);
-    debug('Release one connection');
+    try {
+      yield next;
+    } catch (e) {
+      throw e;
+    } finally {
+      this.app._redisPool.release(this.redis);
+      debug('Release one connection');
+    }
   }
 } 
