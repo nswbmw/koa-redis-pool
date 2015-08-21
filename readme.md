@@ -17,27 +17,26 @@ app.use(redisPool({
   timeout: 30000,
   log: false,
   db: 0,
-  redis_options: {
-    // https://github.com/mranney/node_redis#rediscreateclient
-  }
+  ... // https://github.com/luin/ioredis/blob/master/API.md#new-redisport-host-options
 }));
 ```
 
 ### Example
 
 ```
+'use strict';
+
 var koa = require('koa');
-var redisPool = require('koa-redis-pool');
+var redisPool = require('./');
 
 var app = koa();
-app.use(redisPool({log: true}));
+
+app.use(redisPool());
 
 app.use(function* (next) {
-  this.redis.set('name', 'nswbmw');
-  yield next;
-  this.redis.get('name', function (err, name) {
-    console.log(name);
-  });
+  yield this.redis.set('name', 'nswbmw');
+  yield* next;
+  this.body = yield this.redis.get('name');
 });
 
 app.listen(3000);

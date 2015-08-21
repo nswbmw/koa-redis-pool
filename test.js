@@ -1,16 +1,16 @@
+'use strict';
+
 var koa = require('koa');
 var redisPool = require('./');
 
 var app = koa();
 
-app.use(redisPool({log: true}));
+app.use(redisPool());
 
 app.use(function* (next) {
-  this.redis.set('name', 'nswbmw');
-  yield next;
-  this.redis.get('name', function (err, name) {
-    console.log(name);
-  });
+  yield this.redis.set('name', 'nswbmw');
+  yield* next;
+  this.body = yield this.redis.get('name');
 });
 
 app.listen(3000);
