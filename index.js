@@ -14,7 +14,9 @@ var defaultOptions = {
 
 module.exports = function(options) {
   options = options || {};
-  options = merge(defaultOptions, options);
+  if (typeof options === 'object') {
+    options = merge(defaultOptions, options);
+  }
   
   var _redisPool = poolModule.Pool({
     name     : 'koa-redis-pool',
