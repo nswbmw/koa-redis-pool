@@ -14,12 +14,20 @@ var defaultOptions = {
 
 module.exports = function(options) {
   options = options || {};
+  if ('string' === typeof options) {
+    options = { url: options };
+  }
   options = merge(defaultOptions, options);
-  
+
   var _redisPool = poolModule.Pool({
     name     : 'koa-redis-pool',
     create   : function(callback) {
-      var client = new Redis(options);
+      var client;
+      if (options.url) {
+        client = new Redis(options.url);
+      } else {
+        client = new Redis(options);
+      }
       client.once('error', function (e) {
         console.error(e);
         callback(e);

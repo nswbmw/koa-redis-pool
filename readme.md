@@ -21,6 +21,21 @@ app.use(redisPool({
 }));
 ```
 
+or
+
+```
+app.use(redisPool({
+  url: 'localhost:6379', //  if exist, ignore `host`, `port`, `password` and `db`.
+  ...
+}));
+```
+
+or
+
+```
+app.use(redisPool('localhost:6379'));
+```
+
 ### Example
 
 ```
