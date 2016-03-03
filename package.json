@@ -1,6 +1,6 @@
 {
   "name": "koa-redis-pool",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Redis middleware for koa, support connection pool.",
   "main": "index.js",
   "keywords": [
@@ -13,14 +13,14 @@
   },
   "dependencies": {
     "debug": "^2.2.0",
-    "generic-pool": "^2.2.0",
-    "ioredis": "^1.7.5",
-    "merge-descriptors": "^1.0.0"
+    "generic-pool": "^2.4.1",
+    "ioredis": "^1.15.1",
+    "merge-descriptors": "^1.0.1"
   },
   "devDependencies": {
-    "koa": "^0.21.0"
+    "koa": "^1.1.2"
   },
   "author": "nswbmw",
   "license": "MIT",
-  "repository": "https://github.com/MangroveTech/koa-redis-pool.git"
+  "repository": "https://github.com/nswbmw/koa-redis-pool.git"
 }

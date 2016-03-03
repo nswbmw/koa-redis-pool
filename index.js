@@ -47,7 +47,7 @@ module.exports = function(options) {
   });
 
   return function* redisPool(next) {
-    this.redis = yield _redisPool.acquire;
+    this.redis = yield _redisPool.acquire.bind(_redisPool);
     if (!this.redis) this.throw('Fail to acquire one redis connection');
     debug('Acquire one connection');
 
@@ -59,5 +59,5 @@ module.exports = function(options) {
       _redisPool.release(this.redis);
       debug('Release one connection');
     }
-  }
-} 
+  };
+};
